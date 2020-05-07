@@ -1,0 +1,9 @@
+commands:
+  "ruby version": ruby -v
+  "echo done message": echo "done!"
+  "bundle install":
+    pre_command: ruby version
+    ignore_pre: true
+    command: bundle install
+    post_command: echo done message
+    ensure_post: true

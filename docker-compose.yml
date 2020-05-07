@@ -3,6 +3,8 @@ services:
   ruby:
     image: rguidpost
     build: .
-    command: ruby
+    command: /bin/bash
     volumes:
       - .:/app
+    environment:
+      BUNDLE_APP_CONFIG: /app/.bundle
