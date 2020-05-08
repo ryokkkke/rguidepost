@@ -6,5 +6,6 @@ services:
     command: /bin/bash
     volumes:
       - .:/app
+      - ~/.ssh:/root/.ssh
     environment:
       BUNDLE_APP_CONFIG: /app/.bundle
