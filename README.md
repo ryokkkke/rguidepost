@@ -1,8 +1,10 @@
 # Rguidepost
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rguidepost`. To experiment with that code, run `bin/console` for an interactive prompt.
+Guidepost that indicates useful commands to developers of a repository.
 
-TODO: Delete this and the text above, and describe your gem
+Rguidepost helps executing commands specific to a repository, like package.json's 'scripts' in a node repository.
+You can use a YAML file (rguidepost.yml) to define commands instead of package.json in a Ruby repository.
+
 
 ## Installation
 
@@ -22,17 +24,51 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create rguidepost.yml like below.
+
+```rguidepost.yml
+commands:
+  "list all files": ls -lah
+  "cat rguidepost config file":
+    pre_command: list all files
+    ignore_pre: true (default: false)
+    command: cat rguidepost.yml
+    post_command: echo done message
+    ensure_post: true (default: false)
+  "echo done message": echo 'done!!'
+```
+
+Commands can be set under 'commands' key like above.
+Keys (command names) under 'commands' should be unique.
+
+rguidepost will abort executing next command if prior command failed (fail means status is not 0), but will execute next command regardless of pre_command status if ignore_pre/ensure_post is true.
+
+Then,
+
+```
+$ rguidepost
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Test
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Unfortunately, test is nothing yet.
+
+### Docker
+
+```
+$ docker-compose build
+$ docker-compose run ruby
+$ cat .bundle/config
+---
+BUNDLE_PATH: "vendor/bundle"
+$ bundle install
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rguidepost. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rguidepost/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/ryokkkke/rguidepost. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rguidepost/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## License

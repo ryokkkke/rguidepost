@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    rguidepost (0.1.1)
+    rguidepost (0.2.0)
+      tty-prompt (= 0.21.0)
 
 GEM
   remote: https://rubygems.org/
@@ -46,7 +47,6 @@ DEPENDENCIES
   rake (~> 12.0)
   rguidepost!
   rspec (~> 3.0)
-  tty-prompt
 
 BUNDLED WITH
    2.1.4
